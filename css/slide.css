@@ -21,9 +21,9 @@ body{
 	display: block;
 }
 .app-name{
-	color: #00e800;
+	color: white;
 	text-align: center;
-	text-shadow: white 2px 2px;
+	text-shadow: gray 2px 2px;
 }
 .control{
 	background-color: white;
