@@ -125,8 +125,8 @@ body{
 .page-off-canvas-enter{
 	transform: translateX(50%);
 }
-.page-off-canvas-leave{
-}
+/* .page-off-canvas-leave{
+} */
 .page-contain-enter{
 	width: 70%;
 }
@@ -135,8 +135,6 @@ body{
 }
 .content{
 	padding: 20px;
-}
-{
 }
 .btn{
 	border:1px solid indigo;

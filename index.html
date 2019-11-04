@@ -136,9 +136,9 @@
 		 }
 		 el.ontouchend = function(event){
 		 	endPoint = event.changedTouches[0].clientX;
-		 	if (startPoint < endPoint) {
+		 	if (startPoint < (endPoint - 100)) {
 		 		swipeRight();
-		 	}else if(startPoint > endPoint){
+		 	}else if(startPoint > (100 + endPoint)){
 		 		swipeLeft();
 		 	}
 		 }
