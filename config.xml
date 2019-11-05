@@ -2,7 +2,7 @@
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "https://apps.bsdevtech.com"
     id          = "com.bsdevtech.apps"
-    versionCode = "12"
+    versionCode = "1"
     version     = "1.0.1" >
 
 <!-- versionCode is optional and Android only -->
@@ -18,5 +18,7 @@
   </author>
 
   <icon src="fin_manager.png" />
+  <preference name="Fullscreen" value="true" />
+  <preference name="Orientation" value="portrait" />
 
 </widget>

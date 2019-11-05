@@ -28,11 +28,11 @@ body{
 .control{
 	background-color: white;
 	box-shadow: 0px 0px 5px #979797;
-	padding: 15px;
+	padding: 7px;
 	width: 20px;
 	height:20px;
 	border-radius: 35px;
-	top: 9px;
+	top: 17px;
 	left: 8px;
 	position: fixed;
 	cursor: pointer;
@@ -60,8 +60,8 @@ body{
 }
 .aside{
 	background-color: indigo;
-	width: 50%;
 	position: fixed;
+	width: 34%;
 	left: 0px;
 	top: 0px;
 	height: 100%;
@@ -80,8 +80,9 @@ body{
 	transition-duration: .25s;
 }
 .aside-enter,
-.page-off-canvas-enter,
-.page-off-canvas-leave,
+.aside-leave,
+.page-off-canvas-left-enter,
+.page-off-canvas-left-leave,
 .page-contain-enter,
 .page-contain-leave,
 .aside li:hover,
@@ -91,14 +92,12 @@ body{
 	transition-timing-function: cubic-bezier(.8, 0, 1, .1);
 }
 .aside-leave{
-	max-width: 34%;
 	transform: translate(-100%);
 }
-/*.aside-enter{
-	width: 30%;
-}*/
+.aside-enter{
+	min-width: 50% !important;
+}
 .aside ul{
-	margin-top: 70px;
     margin-left: -40px;
 }
 .aside li{
@@ -122,7 +121,7 @@ body{
 	position: relative;
 	border-radius: 0px 0px 160% 15px;
 }
-.page-off-canvas-enter{
+.page-off-canvas-left-enter{
 	transform: translateX(50%);
 }
 /* .page-off-canvas-leave{
@@ -150,10 +149,12 @@ body{
 	float: right;
 }
 .btn-round{
-	padding: 10px 14px;
+	padding: 10px 16px;
 	width: 30px;
 	height: 30px;
 	border-radius: 100%;
+	font-weight: bolder;
+	font-size: 25px;
 }
 .btn-secondary{
 	background-color: indigo;
@@ -195,4 +196,71 @@ body{
 	padding: 20px 30px 10px 30px;
 	margin-left: 5px;
 	width: 100%;
+}
+.display-below{
+	top: 100%;
+}
+.modal-overlay{
+	width: 100%;
+	height:100%;
+	top: 0%;
+	overflow-y: scroll;
+	z-index: 100;
+	position: fixed;
+	background-color: indigo;
+}
+.modal-overlay,
+.show-modal,
+.display-below{
+	transition-duration: .2s;
+}
+.modal{
+	display: none;
+}
+.show-modal{
+	box-shadow: 0px 0px 5px #E7E7E7;
+	width: 90%;
+	min-height: 120px;
+	background-color: white;
+	display: block;
+	position: relative;
+	border-radius: 3%;
+	left: 5%;
+	top: 15%;
+	max-height: 85%;
+}
+.close-dialog{
+	position: inherit;
+	top: 2%;
+	display: inline;
+	transform: rotateX(45deg);
+	left: 88%;
+}
+input{
+	padding: 10px 15px;
+	border-style: ridge;
+	border-radius: 5px;
+	display: block;
+	width: 85%;
+}
+div.form{
+	margin-bottom: 4px;
+}
+.contain{
+	padding: 15px;
+}
+.theme-red{
+	background-color: red;
+	color: white;
+}
+.logo{
+	width: 50%;
+	height: 50%;
+	padding: 10px;
+	border-radius: 100%;
+	background-color: white;
+}
+.user{
+	padding:50px 10px 10px 10px;
+	text-align: center;
 }
