@@ -1,3 +1,155 @@
+const Budget = Vue.extend({
+	template:'#budget-intro',
+	data(){
+		return{
+			//
+		}
+	},
+	props:['dialogs'],
+	methods:{
+		open_dialog(object){
+			object.show_modal = true;
+		}
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.budget;
+		}
+	}
+});
+Vue.component('budget-intro', Budget);
+const CreateBudgetDialog = Vue.extend({
+	template:"#activity-dialog",
+	data:function(){
+		return{
+			form_data:'What soeve ais iko',
+		}
+	},
+	props:['dialogs'],
+	methods:{
+		//
+		close_dialog(object){
+			object.show_modal = false;
+		},
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.budget;
+		}
+	}
+});
+Vue.component('create-budget-dialog', CreateBudgetDialog);
+
+const Saving = Vue.extend({
+	template:'#saving-intro',
+	data(){
+		return{
+			//
+		}
+	},
+	props:['dialogs'],
+	methods:{
+		open_dialog(object){
+			object.show_modal = true;
+		}
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.saving;
+		}
+	}
+});
+Vue.component('saving-intro', Saving);
+const CreateSavingDialog = Vue.extend({
+	template:"#activity-dialog",
+	data(){
+		return{
+			form_data:'Real Value',
+		}
+	},
+	props:['dialogs'],
+	methods:{
+		//
+		close_dialog(object){
+			object.show_modal = false;
+		},
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.saving;
+		}
+	}
+});
+Vue.component('create-saving-dialog', CreateSavingDialog);
+
+const Record = Vue.extend({
+	template:'#record-intro',
+	data(){
+		return{
+			//
+		}
+	},
+	props:['dialogs'],
+	methods:{
+		open_dialog(object){
+			object.show_modal = true;
+		}
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.record;
+		}
+	}
+});
+Vue.component('record-intro', Record);
+const CreateRecordDialog = Vue.extend({
+	template:"#activity-dialog",
+	props:['dialogs'],
+	methods:{
+		//
+		close_dialog(object){
+			object.show_modal = false;
+		},
+	},
+	computed:{
+		dialog(){
+			return this.dialogs.record;
+		}
+	}
+});
+Vue.component('create-record-dialog', CreateRecordDialog);
+Vue.component('record-form', {
+	template:'#record-form',
+	data:function(){
+		return{
+			transaction_types:['Credit', 'Debit'],
+			form_data:{
+				type:null,
+				amount:null,
+				description:null,
+				title:null,
+			},
+		}
+	},
+	methods:{
+		addRecord(){
+			localStorage.setItem(`record-${localStorage.length+1}`, JSON.stringify(this.form_data));
+			location.reload();
+		}
+	}
+})
+Vue.component('records',{
+	template:'#records',
+	computed:{
+		records(){
+			let records = [];
+			for (var i = 1; i <= localStorage.length; i++) {
+				records.push(JSON.parse(localStorage.getItem(`record-${i}`)));
+			}
+			return records;
+		}
+	}
+})
 const app = new Vue({
 	el:'#app',
 	data:{
@@ -5,15 +157,17 @@ const app = new Vue({
 		sliders : ['off-canvas-left', 'scroll-up', 'scroll-down', 'off-canvas-right'],
 		chosen_slider : 0,
 		budget:null,
-		show_modal:false
+		object:null,
+		dialogs:{
+			budget:{show_modal:false},
+			saving:{show_modal:false},
+			record:{show_modal:false}
+		}
 	},
 	methods:{
 		//
-		open_budget_dialog(){
-			this.show_modal = true;
-		},
-		close_budget_dialog(){
-			this.show_modal = false;
+		open_dialog(object){
+			object.show_modal = true;
 		},
 		toggleShow(){
 			if(aside && page){

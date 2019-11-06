@@ -18,7 +18,7 @@
   </author>
 
   <icon src="fin_manager.png" />
-  <preference name="Fullscreen" value="true" />
+  <preference name="BackgroundColor" value="0x#4b0082"/>
   <preference name="Orientation" value="portrait" />
 
 </widget>

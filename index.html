@@ -42,35 +42,9 @@
 					<h1 class="app-name">Financial Manager</h1>
 				</div>
 				<div class="body">
-					<div class="article row">
-						<div class="col-sm-6">
-							<div class="add"><span class="btn-round">+</span></div>
-							<h3>Daily Records</h3>
-						</div>
-						<div class="col-sm-6">
-							<p>Record your daily financial transactions to make better financial decisions</p>
-						</div>
-					</div>
-					<div class="article row">
-						<div class="col-sm-6">
-							<div class="add" @click="open_budget_dialog"><span class="btn-round">+</span></div>
-							<h3>Budgeting</h3>
-							
-						</div>
-						<div class="col-sm-6">
-							<p>Set your spend limit according to your income</p>
-						</div>
-					</div>
-					<div class="article row">
-						<div class="col-sm-6">
-							<div class="add"><span class="btn-round">+</span></div>
-							<h3>Savings Plan</h3>
-							
-						</div>
-						<div class="col-sm-6">
-							<p>Compute the best saving plan with priorities clearly stated</p>
-						</div>
-					</div>
+					<budget-intro :dialogs="dialogs"></budget-intro>
+					<record-intro  :dialogs='dialogs'></record-intro>
+					<saving-intro  :dialogs='dialogs'></saving-intro>
 				</div>
 			</div>
 		</div>
@@ -79,9 +53,8 @@
 			<span class="x1">Latest</span>
 			<span class="x1">Next</span>
 		</div>
-		<div :class="{'modal-overlay':show_modal}" class="display-below">
-			<div class="modal" :class="{'show-modal':show_modal}">
-				<span class="btn-round theme-red close-dialog" @click="close_budget_dialog">&times;</span>
+		<create-budget-dialog :dialogs='dialogs'>
+			<template slot-scope="form_data">
 				<div class="contain">
 					<h3>Set Budget</h3>
 					<div class="form">
@@ -97,8 +70,112 @@
 						<input type="number" placeholder="amount" name="amount">
 					</div>
 				</div>
+				
+			</template>
+		</create-budget-dialog>
+		<create-saving-dialog :dialogs='dialogs'>
+			<div class="contain">
+				<h3>Compute Savings Plan</h3>
+				<div class="form">
+					<input type="text" placeholder="Purpose" name="title">
+				</div>
+				<div class="form">
+					<input type="number" placeholder="goal (total amount)" name="amount">
+				</div>
+				<div class="form">
+					<input type="text" placeholder="Title" name="title">
+				</div>
+				<div class="form">
+					<input type="number" placeholder="amount" name="amount">
+				</div>
+			</div>
+		</create-saving-dialog>
+		<create-record-dialog :dialogs='dialogs'>
+			<record-form></record-form>
+			<records></records>
+		</create-record-dialog>
+	</section>
+	<template id="budget-intro">
+		<div class="article row">
+			<div class="col-sm-6">
+				<div class="add" @click="open_dialog(dialog)">
+					<span class="btn-round">+</span>
+				</div>
+				<h3>Budgeting</h3>
+			</div>
+			<div class="col-sm-6">
+				<p>Set your spend limit according to your income</p>
 			</div>
 		</div>
-	</section>
+	</template>
+	<template id="saving-intro">
+		<div class="article row">
+			<div class="col-sm-6">
+				<div class="add" @click="open_dialog(dialog)"><span class="btn-round">+</span></div>
+				<h3>Savings Plan</h3>
+				
+			</div>
+			<div class="col-sm-6">
+				<p>Compute the best saving plan with priorities clearly stated</p>
+			</div>
+		</div>
+	</template>
+	<template id="record-intro">
+		<div class="article row">
+			<div class="col-sm-6">
+				<div class="add" @click="open_dialog(dialog)"><span class="btn-round">+</span></div>
+				<h3>Daily Records</h3>
+			</div>
+			<div class="col-sm-6">
+				<p>Record your daily financial transactions to make better financial decisions</p>
+			</div>
+		</div>
+	</template>
+	<template id="record-form">
+		<div class="contain">
+			<h3>Record Your Transactions</h3>
+			<div class="form">
+				<input type="text" v-model="form_data.title" placeholder="Title" name="title">
+			</div>
+			<div class="form">
+				<input type="text" v-model="form_data.description" placeholder="record description" name="description">
+			</div>
+			<div class="form">
+				<select type="text" v-model="form_data.type" placeholder="Debit/Credit" name="transaction_type" class="form-control">
+					<option disabled="" value="null">Debit/Credit</option>
+					<option v-for="type in transaction_types">{{type}}</option>
+				</select>
+			</div>
+			<div class="form">
+				<input type="number" v-model="form_data.amount" placeholder="$489.489" name="amount">
+			</div>
+			<div class="form">
+				<div @click="addRecord" class="btn btn-secondary">Add</div>
+			</div>
+		</div>
+	</template>
+	<template id="activity-dialog">
+		<div :class="{'modal-overlay':dialog.show_modal, 'display-below':!dialog.show_modal}" class="default-modal">
+			<div :class="{'modal':!dialog.show_modal,'show-modal':dialog.show_modal}">
+				<span class="btn-round theme-red close-dialog" @click="close_dialog(dialog)">&times;</span>
+				<slot>
+					<div class="contain">
+						<!-- Insert content with the outer container class as contain or any styled container -->
+						<h3 class="text-center">Dialog to show here</h3>
+					</div>
+				</slot>
+			</div>
+		</div>
+	</template>
+	<template id="records">
+		<div class="contain">
+			<h5>Saved records</h5>
+			<div v-for="record in records">
+				<span>{{record.title}} | </span>
+				<span>{{record.type}} | </span>
+				<span>${{record.amount}}</span>
+			</div>
+		</div>
+	</template>
 </body>
 </html>
