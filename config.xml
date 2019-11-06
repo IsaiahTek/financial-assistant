@@ -19,5 +19,5 @@
 
   <icon src="fin_manager.png" />
   <preference name="BackgroundColor" value="#4b0082"/>
-
+  <preference name="Fullscreen" value="true" />
 </widget>
