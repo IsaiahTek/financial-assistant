@@ -18,7 +18,6 @@
   </author>
 
   <icon src="fin_manager.png" />
-  <preference name="BackgroundColor" value="0x4b0082"/>
-  <preference name="Orientation" value="portrait" />
+  <preference name="BackgroundColor" value="#4b0082"/>
 
 </widget>
