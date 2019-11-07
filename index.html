@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div class="footer-control">
-			<span class="x1">{{slider}}</span>
+			<span class="x1">Previous</span>
 			<span class="x1">Latest</span>
 			<span class="x1">Next</span>
 		</div>
@@ -92,7 +92,7 @@
 		</create-saving-dialog>
 		<create-record-dialog :dialogs='dialogs'>
 			<record-form></record-form>
-			<records></records>
+			<record></record>
 		</create-record-dialog>
 	</section>
 	<template id="budget-intro">
@@ -134,24 +134,26 @@
 	<template id="record-form">
 		<div class="contain">
 			<h3>Record Your Transactions</h3>
-			<div class="form">
-				<input type="text" v-model="form_data.title" placeholder="Title" name="title">
-			</div>
-			<div class="form">
-				<input type="text" v-model="form_data.description" placeholder="record description" name="description">
-			</div>
-			<div class="form">
-				<select type="text" v-model="form_data.type" placeholder="Debit/Credit" name="transaction_type" class="form-control">
-					<option disabled="" value="null">Debit/Credit</option>
-					<option v-for="type in transaction_types">{{type}}</option>
-				</select>
-			</div>
-			<div class="form">
-				<input type="number" v-model="form_data.amount" placeholder="$489.489" name="amount">
-			</div>
-			<div class="form">
-				<div @click="addRecord" class="btn btn-secondary">Add</div>
-			</div>
+			<form>
+				<div class="form">
+					<input type="text" required="" v-model="form_data.title" placeholder="Title" name="title">
+				</div>
+				<div class="form">
+					<input type="text" required="" v-model="form_data.description" placeholder="record description" name="description">
+				</div>
+				<div class="form">
+					<select type="text" required="" v-model="form_data.type" placeholder="Debit/Credit" name="transaction_type" class="form-control">
+						<option disabled="" value="null">Debit/Credit</option>
+						<option v-for="type in transaction_types">{{type}}</option>
+					</select>
+				</div>
+				<div class="form">
+					<input type="number" v-model="form_data.amount" placeholder="$489.489" name="amount">
+				</div>
+				<div class="form">
+					<input @click="addRecord" class="btn btn-secondary btn-block" type="submit" value="Add">
+				</div>
+			</form>
 		</div>
 	</template>
 	<template id="activity-dialog">
@@ -169,12 +171,16 @@
 	</template>
 	<template id="records">
 		<div class="contain">
-			<h5>Saved records</h5>
-			<div v-for="record in records">
-				<span>{{record.title}} | </span>
-				<span>{{record.type}} | </span>
-				<span>${{record.amount}}</span>
-			</div>
+			<h5>Last saved records</h5>
+			<record :record="record" :key="id" v-for="(record, id) in records"></record>
+		</div>
+	</template>
+	<template id="record">
+		<div class="contain">
+			<h4>Last recorded</h6>
+			<span>{{record.title}} | </span>
+			<span>{{record.type}} | </span>
+			<span>${{record.amount}}</span>
 		</div>
 	</template>
 </body>

@@ -149,7 +149,7 @@ body{
 	float: right;
 }
 .btn-round{
-	padding: 10px 16px;
+	padding: 10px 17px;
 	width: 30px;
 	height: 30px;
 	border-radius: 100%;
@@ -169,6 +169,9 @@ body{
 }
 div.btn{
 	text-align: center;
+}
+.btn-block{
+	width: 100%;
 }
 .article{
 	background-color: indigo;
@@ -249,13 +252,19 @@ div.btn{
 }
 .form-control, input{
 	padding: 10px 15px;
-	border-style: ridge;
-	border-radius: 5px;
 	display: block;
 	width: 87%;
 }
+select, input{
+	border: 1px solid #EFEFEF;
+}
+select:focus, input:focus{
+	box-shadow: 0 0 8px indigo;
+	border: 1px solid rgba(81, 203, 238, 1);
+}
 select{
 	min-width: 100%;
+	background-color: transparent;
 }
 div.form{
 	margin-bottom: 4px;

@@ -35,6 +35,9 @@ const CreateBudgetDialog = Vue.extend({
 	computed:{
 		dialog(){
 			return this.dialogs.budget;
+		},
+		lastSaved(){
+			//
 		}
 	}
 });
@@ -77,6 +80,9 @@ const CreateSavingDialog = Vue.extend({
 	computed:{
 		dialog(){
 			return this.dialogs.saving;
+		},
+		lastSaved(){
+			//
 		}
 	}
 });
@@ -114,8 +120,12 @@ const CreateRecordDialog = Vue.extend({
 	computed:{
 		dialog(){
 			return this.dialogs.record;
+		},
+		lastSaved(){
+			return this.$parent.records[1];
 		}
-	}
+	},
+
 });
 Vue.component('create-record-dialog', CreateRecordDialog);
 Vue.component('record-form', {
@@ -136,7 +146,7 @@ Vue.component('record-form', {
 			localStorage.setItem(`record-${localStorage.length+1}`, JSON.stringify(this.form_data));
 			location.reload();
 		}
-	}
+	},
 })
 Vue.component('records',{
 	template:'#records',
@@ -147,6 +157,14 @@ Vue.component('records',{
 				records.push(JSON.parse(localStorage.getItem(`record-${i}`)));
 			}
 			return records;
+		}
+	}
+})
+Vue.component('record', {
+	template:'#record',
+	computed:{
+		record(){
+			return this.$parent.$parent.records[this.$parent.$parent.records.length-1]
 		}
 	}
 })
@@ -248,6 +266,13 @@ const app = new Vue({
 		},
 		slider_page_class_leave(){
 			return `page-${this.slider}-leave`;
+		},
+		records(){
+			let records = [];
+			for (var i = 1; i <= localStorage.length; i++) {
+				records.push(JSON.parse(localStorage.getItem(`record-${i}`)));
+			}
+			return records;
 		}
 	}
 });
