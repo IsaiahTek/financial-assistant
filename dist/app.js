@@ -1243,6 +1243,18 @@ function onDeviceReady() {
   window.open = cordova.InAppBrowser.open;
 }
 
+var admobid = {};
+admobid = {
+  interstitial: 'ca-app-pub-4080611919888715/9917907728'
+}; // preppare and load ad resource in background, e.g. at begining of game level
+
+if (AdMob) AdMob.prepareInterstitial({
+  adId: admobid.interstitial,
+  autoShow: false
+}); // show the interstitial later, e.g. at end of game level
+
+if (AdMob) AdMob.showInterstitial();
+
 /***/ }),
 
 /***/ "./js/store/store.js":
