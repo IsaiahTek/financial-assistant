@@ -7,16 +7,16 @@
 
 <!-- versionCode is optional and Android only -->
 
-  <name>Financial Manager</name>
+    <name>Financial Manager</name>
 
-  <description>
-      The app for making informed financial decisions. Making you to be more financially inclusive
-  </description>
+    <description>
+        The app for making informed financial decisions. Making you to be more financially inclusive
+    </description>
 
-  <author href="http://apps.bsdevtech.com" email="isaiahtech1@gmail.com">
-      Engr. Isaiah Pius
-  </author>
-  <content src="index.html" />
+    <author href="http://apps.bsdevtech.com" email="isaiahtech1@gmail.com">
+        Engr. Isaiah Pius
+    </author>
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -45,6 +45,7 @@
     </platform>
     <preference name="SplashScreenDelay" value="3000" />
 
-  <icon src="fin_manager.png" />
-  <preference name="Fullscreen" value="true" />
+    <plugin name="cordova-plugin-admobpro" spec="2.29.29" source="pgb" />
+    <plugin name="cordova-plugin-inappbrowser" source="npm" />
+    <icon src="fin_manager.png" />
 </widget>
