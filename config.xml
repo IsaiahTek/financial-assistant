@@ -45,7 +45,7 @@
     </platform>
     <preference name="SplashScreenDelay" value="3000" />
 
-    <plugin name="cordova-plugin-admobpro" source="pgb" />
+    <plugin name="cordova-plugin-admobpro" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <icon src="fin_manager.png" />
 </widget>
