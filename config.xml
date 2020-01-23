@@ -47,6 +47,7 @@
 
     <plugin name="cordova-plugin-admobpro" source="npm">
         <variable name="ADMOB_APP_ID" value="ca-app-pub-4080611919888715~1109479418" />
+        <variable name="PLAY_SERVICES_VERSION" value="16.0.0" />
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" source="npm" />
     <icon src="fin_manager.png" />
