@@ -1201,7 +1201,9 @@ function swipeListener() {
   var endPoint = null;
 
   el.ontouchstart = function (event) {
-    if ((event.target.id || event.target.parentNode.id) == 'menu_ball') {//
+    if ((event.target.id || event.target.parentNode.id) == 'menu_ball') {
+      //
+      console.log(384);
     } else {
       startPoint = event.changedTouches[0].clientX;
     }
@@ -1233,6 +1235,8 @@ function swipeRight() {
 
   is_visible = !is_visible;
 }
+
+swipeListener();
 
 /***/ }),
 

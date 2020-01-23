@@ -386,3 +386,6 @@ tr.divide-row:nth-child(even){
 .bg-white{
 	background-color: white;
 }
+a{
+	text-decoration: none;
+}
