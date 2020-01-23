@@ -22,21 +22,21 @@
 			<div class="title-bar">
 				<h1 class="app-name">Financial Manager</h1>
 			</div>
-			<div class="sm-round bg-white" @click="showNotification">
+			<div class="sm-round bg-white" @click="toggleNotification">
 				<span class="t-green"><strong>&iscr;</strong></span>
 			</div>
 			<div v-if="isNotify" class="t-center header-notification">
-				<span class="t-green">
+				<span>
 					<span>Income: </span>
-					<span>${{cashFlow.totalCredit}}</span>
+					<span class="t-green">${{cashFlow.totalCredit}}</span class="t-green">
 				</span> &ndash;
-				<span class="t-red">
+				<span>
 					<span>Spent: </span>
-					<span>${{cashFlow.totalDebit}}</span>
+					<span class="t-red">${{cashFlow.totalDebit}}</span class="t-red">
 				</span>
 				<p>=</p>
 				<p :class="{'t-green':mySavings>0, 't-red':mySavings<0}">
-					<span><strong>Saved: </strong></span>
+					<span><i>Saved: </i></span>
 					<span><strong>${{mySavings}}</strong></span>
 				</p>
 			</div>
