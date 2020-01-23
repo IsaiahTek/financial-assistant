@@ -1,1 +1,7 @@
 /Finance.ecp
+/node_*
+/src
+/mix*
+/packag*
+/webpack*
+/js

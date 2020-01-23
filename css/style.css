@@ -2,16 +2,42 @@ body{
 	overflow-x: hidden;
 	margin: 0px;
 	padding: 0px;
+	color: #3d3c3c;
 }
 .body{
 	margin-top: 90px;
-	padding-bottom: 50px;
 }
 .toggle-menu-visibility{
 	display: block;
 	margin-top: 3px;
 }
+.header{
+	position: fixed;
+	top: 0px;
+	z-index: 2;
+	width: 100%;
+	background-color: indigo;
+}
 .title-bar{
+	background-color: indigo;
+	display: grid;
+	margin-top: 0px;
+	min-width: 100%;
+}
+.control{
+	background-color: white;
+	box-shadow: 0px 0px 5px #979797;
+	padding: 7px;
+	width: 20px;
+	height:20px;
+	border-radius: 35px;
+	top: 17px;
+	left: 8px;
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+/*.title-bar{
 	background-color: indigo;
 	position: fixed;
 	min-height: 50px;
@@ -20,12 +46,16 @@ body{
 	width: 100%;
 	display: block;
 }
+*/
 .app-name{
 	color: white;
 	text-align: center;
 	text-shadow: gray 2px 2px;
 }
-.control{
+h1.app-name{
+	margin-top: -10px;
+}
+/*.control{
 	background-color: white;
 	box-shadow: 0px 0px 5px #979797;
 	padding: 7px;
@@ -37,7 +67,7 @@ body{
 	position: fixed;
 	cursor: pointer;
 	z-index: 10;
-}
+}*/
 .tl,
 .tr,
 .md{
@@ -68,7 +98,7 @@ body{
 	max-height: 100%;
 	color: white;
 	z-index: 5;
-	box-shadow: 0px 3px 8px white;
+	box-shadow: 0px 3px 8px indigo;
     overflow:scroll;
 }
 .tr,
@@ -77,7 +107,7 @@ body{
 .tl-rot,
 .tr-rot,
 .md-hide{
-	transition-duration: .25s;
+	transition-duration: .04s;
 }
 .aside-enter,
 .aside-leave,
@@ -88,7 +118,7 @@ body{
 .aside li:hover,
 .btn-inactive, .inactive,
 .btn-secondary{
-	transition-duration: .5s;
+	transition-duration: .15s;
 	transition-timing-function: cubic-bezier(.8, 0, 1, .1);
 }
 .aside-leave{
@@ -121,6 +151,9 @@ body{
 	position: relative;
 	border-radius: 0px 0px 160% 15px;
 }
+.blank-gap{
+	min-height: 90px;
+}
 .page-off-canvas-left-enter{
 	transform: translateX(50%);
 }
@@ -132,8 +165,11 @@ body{
 .page-contain-leave{
 	width: 100%;
 }
+.t-center{
+	text-align: center;
+}
 .content{
-	padding: 20px;
+	padding: 20px 20px 0px 20px;
 }
 .btn{
 	border:1px solid indigo;
@@ -170,9 +206,6 @@ body{
 div.btn{
 	text-align: center;
 }
-.btn-block{
-	width: 100%;
-}
 .article{
 	background-color: indigo;
 	color: white;
@@ -180,6 +213,7 @@ div.btn{
 	padding: 20px;
 	border-radius: 15px;
 	margin-top: 20px;
+	box-shadow: 0px 0px 8px gray;
 }
 .footer-control{
 	z-index: 0;
@@ -213,7 +247,7 @@ div.btn{
 	transform: translateY(0%);
 	width: 100%;
 	height:100%;
-	top: 0%;
+	top: 10px;
 	overflow-y: scroll;
 	position: fixed;
 	background-color: indigo;
@@ -222,7 +256,7 @@ div.btn{
 .default-modal,
 .show-modal,
 .display-below{
-	transition-duration: .5s;
+	transition-duration: .15s;
 }
 .modal{
 	width: 0%;
@@ -242,6 +276,8 @@ div.btn{
 	left: 5%;
 	top: 15%;
 	max-height: 85%;
+	margin-bottom: 30px;
+    padding-bottom: 10px;
 }
 .close-dialog{
 	position: inherit;
@@ -263,14 +299,13 @@ select:focus, input:focus{
 	border: 1px solid rgba(81, 203, 238, 1);
 }
 select{
-	min-width: 100%;
 	background-color: transparent;
 }
 div.form{
 	margin-bottom: 4px;
 }
 .contain{
-	padding: 15px;
+	padding: 10px 10px 0px 10px;
 }
 .theme-red{
 	background-color: red;
@@ -286,4 +321,68 @@ div.form{
 .user{
 	padding:50px 10px 10px 10px;
 	text-align: center;
+}
+.record-row{
+	background-color: #d5d5d5;
+	padding:22px 12px 1px 12px;
+	border-radius: 8px;
+	box-shadow: 1px 1px 8px #d5d5d5;
+}
+div.btn-block{
+	display: inline-block;
+	width: 90%;
+}
+table{
+	width: 100%;
+	color:green;
+}
+th{color: indigo}
+td,
+th{
+	text-align: left;
+}
+tr.divide-row:nth-child(even){
+	background-color: white;
+}
+.credit{
+	color: green;
+}
+.debit{
+	color: red;
+}
+.bg-green{
+	background-color: #0db80d;
+	color: white;
+	border-color: #0db80d;
+}
+.t-white{
+	color: white;
+}
+.t-green{
+	color: #0db80d;
+}
+.t-red{
+	color:red;
+}
+.header-notification{
+	background-color: white;
+	padding:10px;
+}
+.header-notification>span{
+	margin-left: 5px;
+}
+.header-notification>span:first-child{
+	margin-left: -5px;
+}
+.sm-round{
+	position: absolute;
+	right: 10px;
+	top:40px;
+	padding: 3px 8px 1px 8px;
+	width: min-content;
+	border-radius: 50%;
+	box-shadow: 2px 2px 5px #3d3c3c;
+}
+.bg-white{
+	background-color: white;
 }

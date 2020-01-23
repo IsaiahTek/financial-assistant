@@ -5,183 +5,68 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Plan Your Resources</title>
-	<link rel="stylesheet" type="text/css" href="css/slide.css">
-	<script type="text/javascript" src="js/vue.js"></script>
-	<script type="text/javascript" src="js/app.js" defer="true"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="dist/app.js" defer></script>
 </head>
-<body onoad="swipeListener()" id="target1">
-	<section id="app" @click="swipeListener()">
-		<nav id="aside" class="aside aside-leave">
-			<div class="user">
-				<img class="logo" src="fin_manager.png">
+<body id="target1">
+	<section class="app" id="app">
+		<v-nav></v-nav>
+		<div class="header">
+			<div class="control" id="menu_ball">
+				<span id="toggle_button" class="toggle-menu-visibility" title="toggle navbar visibility">
+					<span id="tl" class="tl"></span>
+					<span id="md" class="md"></span>
+					<span id="tr" class="tr"></span>
+				</span>
 			</div>
-			<ul>
-				<li>Daily Records</li>
-				<li>Budgets</li>
-				<li>Savings Plan</li>
-				<li>Loans</li>
-				<li>Monthly Info</li>
-				&nbsp;&nbsp;&nbsp;Connect
-				<li></li>
-				<li>Learn Financial Management</li>
-				<li>Business Opportunities</li>
-				<li>Starting My Business</li>
-				<li>Discover More</li>
-			</ul>
-		</nav>
+			<div class="title-bar">
+				<h1 class="app-name">Financial Manager</h1>
+			</div>
+			<div class="sm-round bg-white" @click="showNotification">
+				<span class="t-green"><strong>&iscr;</strong></span>
+			</div>
+			<div v-if="isNotify" class="t-center header-notification">
+				<span class="t-green">
+					<span>Income: </span>
+					<span>${{cashFlow.totalCredit}}</span>
+				</span> &ndash;
+				<span class="t-red">
+					<span>Spent: </span>
+					<span>${{cashFlow.totalDebit}}</span>
+				</span>
+				<p>=</p>
+				<p :class="{'t-green':mySavings>0, 't-red':mySavings<0}">
+					<span><strong>Saved: </strong></span>
+					<span><strong>${{mySavings}}</strong></span>
+				</p>
+			</div>
+		</div>
 		<div class="page container-fluid" id="page">
 			<div class="content">
-				<div class="control" @click="toggleShow()">
-					<span id="toggle_button" class="toggle-menu-visibility" title="toggle navbar visibility">
-						<span id="tl" class="tl"></span>
-						<span id="md" class="md"></span>
-						<span id="tr" class="tr"></span>
-					</span>
-				</div>
-				<div class="title-bar">
-					<h1 class="app-name">Financial Manager</h1>
-				</div>
 				<div class="body">
 					<budget-intro :dialogs="dialogs"></budget-intro>
-					<record-intro  :dialogs='dialogs'></record-intro>
-					<saving-intro  :dialogs='dialogs'></saving-intro>
+					<record-intro :dialogs='dialogs'></record-intro>
+					<saving-intro :dialogs='dialogs'></saving-intro>
 				</div>
 			</div>
+			<records-view :records='records'></records-view>
+			<div class="blank-gap"></div>	
 		</div>
 		<div class="footer-control">
-			<span class="x1">Previous</span>
-			<span class="x1">Latest</span>
-			<span class="x1">Next</span>
+			<span class="x1">
+				<p>Income</p>
+			</span>
+			<span class="x1">
+				<p>Spent</p>
+			</span>
+			<span class="x1">
+				<p>Saved</p>
+			</span>
 		</div>
-		<create-budget-dialog :dialogs='dialogs'>
-			<template slot-scope="form_data">
-				<div class="contain">
-					<h3>Set Budget</h3>
-					<div class="form">
-						<input type="text" placeholder="Title" name="title">
-					</div>
-					<div class="form">
-						<input type="number" placeholder="amount" name="amount">
-					</div>
-					<div class="form">
-						<input type="text" placeholder="Title" name="title">
-					</div>
-					<div class="form">
-						<input type="number" placeholder="amount" name="amount">
-					</div>
-				</div>
-				
-			</template>
-		</create-budget-dialog>
-		<create-saving-dialog :dialogs='dialogs'>
-			<div class="contain">
-				<h3>Compute Savings Plan</h3>
-				<div class="form">
-					<input type="text" placeholder="Purpose" name="title">
-				</div>
-				<div class="form">
-					<input type="number" placeholder="goal (total amount)" name="amount">
-				</div>
-				<div class="form">
-					<input type="text" placeholder="Title" name="title">
-				</div>
-				<div class="form">
-					<input type="number" placeholder="amount" name="amount">
-				</div>
-			</div>
-		</create-saving-dialog>
-		<create-record-dialog :dialogs='dialogs'>
-			<record-form></record-form>
-			<record></record>
-		</create-record-dialog>
+		<create-saving-dialog :dialogs='dialogs'></create-saving-dialog>
+
+		<create-budget-dialog :dialogs='dialogs'></create-budget-dialog>
+
+		<create-record-dialog :dialogs='dialogs'></create-record-dialog>
 	</section>
-	<template id="budget-intro">
-		<div class="article row">
-			<div class="col-sm-6">
-				<div class="add" @click="open_dialog(dialog)">
-					<span class="btn-round">+</span>
-				</div>
-				<h3>Budgeting</h3>
-			</div>
-			<div class="col-sm-6">
-				<p>Set your spend limit according to your income</p>
-			</div>
-		</div>
-	</template>
-	<template id="saving-intro">
-		<div class="article row">
-			<div class="col-sm-6">
-				<div class="add" @click="open_dialog(dialog)"><span class="btn-round">+</span></div>
-				<h3>Savings Plan</h3>
-				
-			</div>
-			<div class="col-sm-6">
-				<p>Compute the best saving plan with priorities clearly stated</p>
-			</div>
-		</div>
-	</template>
-	<template id="record-intro">
-		<div class="article row">
-			<div class="col-sm-6">
-				<div class="add" @click="open_dialog(dialog)"><span class="btn-round">+</span></div>
-				<h3>Daily Records</h3>
-			</div>
-			<div class="col-sm-6">
-				<p>Record your daily financial transactions to make better financial decisions</p>
-			</div>
-		</div>
-	</template>
-	<template id="record-form">
-		<div class="contain">
-			<h3>Record Your Transactions</h3>
-			<form>
-				<div class="form">
-					<input type="text" required="" v-model="form_data.title" placeholder="Title" name="title">
-				</div>
-				<div class="form">
-					<input type="text" required="" v-model="form_data.description" placeholder="record description" name="description">
-				</div>
-				<div class="form">
-					<select type="text" required="" v-model="form_data.type" placeholder="Debit/Credit" name="transaction_type" class="form-control">
-						<option disabled="" value="null">Debit/Credit</option>
-						<option v-for="type in transaction_types">{{type}}</option>
-					</select>
-				</div>
-				<div class="form">
-					<input type="number" v-model="form_data.amount" placeholder="$489.489" name="amount">
-				</div>
-				<div class="form">
-					<input @click="addRecord" class="btn btn-secondary btn-block" type="submit" value="Add">
-				</div>
-			</form>
-		</div>
-	</template>
-	<template id="activity-dialog">
-		<div :class="{'modal-overlay':dialog.show_modal, 'display-below':!dialog.show_modal}" class="default-modal">
-			<div :class="{'modal':!dialog.show_modal,'show-modal':dialog.show_modal}">
-				<span class="btn-round theme-red close-dialog" @click="close_dialog(dialog)">&times;</span>
-				<slot>
-					<div class="contain">
-						<!-- Insert content with the outer container class as contain or any styled container -->
-						<h3 class="text-center">Dialog to show here</h3>
-					</div>
-				</slot>
-			</div>
-		</div>
-	</template>
-	<template id="records">
-		<div class="contain">
-			<h5>Last saved records</h5>
-			<record :record="record" :key="id" v-for="(record, id) in records"></record>
-		</div>
-	</template>
-	<template id="record">
-		<div class="contain">
-			<h4>Last recorded</h6>
-			<span>{{record.title}} | </span>
-			<span>{{record.type}} | </span>
-			<span>${{record.amount}}</span>
-		</div>
-	</template>
 </body>
-</html>

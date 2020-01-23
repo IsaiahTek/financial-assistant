@@ -1,8 +1,8 @@
-
 let is_visible = false;
 let sliders = ['off-canvas-left', 'contain'];
 let off_canvas = 0;
 let choice_slider = null;
+let toggleHandle = document.getElementById('menu_ball')
 function toggleShow(){
 	if(aside && page){
 		if(is_visible){
@@ -13,6 +13,7 @@ function toggleShow(){
 		is_visible = !is_visible;
 	}
 }
+toggleHandle.addEventListener('click', toggleShow)
 function hideMenu() {
 	//slide aside out of view and make page full width;
 	
@@ -27,7 +28,7 @@ function hideMenu() {
 	aside.classList.add('aside-leave');
 	aside.classList.remove('aside-enter');
 	page.classList.remove(slider_page_class_enter);
-	page.classList.add(slider_page_class_leave);
+	// page.classList.add(slider_page_class_leave);
 }
 function showMenu(){
 	//slide aside into view and make page default width;
@@ -49,12 +50,17 @@ function moveEnd(event) {
  // Process the event
  // console.log(event.changedTouches[0].clientX);
 }
+document.onload = swipeListener()
 function swipeListener() {
  var el=document.getElementById("target1");
  let startPoint = null;
  let endPoint = null;
  el.ontouchstart = function(event){
- 	startPoint = event.changedTouches[0].clientX;
+ 	if((event.target.id||event.target.parentNode.id) == 'menu_ball'){
+ 		//
+ 	}else{
+	 	startPoint = event.changedTouches[0].clientX;
+ 	}
  }
  el.ontouchend = function(event){
  	endPoint = event.changedTouches[0].clientX;
