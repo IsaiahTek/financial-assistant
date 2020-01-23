@@ -57,10 +57,10 @@
 				<a href="https://facebook.com">HTTPS</a>
 			</span>
 			<span class="x1 bg-white">
-				<a class=" t-red" href="http://facebook.com">HTTP</a>
+				<a class=" t-red" href="http://facebook.com" onclick="window.open('https://www.facebook.com', '_blank'); return false;">Blank</a>
 			</span>
 			<span class="x1 bg-white">
-				<a class=" t-green" href="www.facebook.com" onclick="window.open('https://www.facebook.com', '_system'); return false;">W3</a>
+				<a class=" t-green" href="www.facebook.com" onclick="window.open('https://www.facebook.com', '_self'); return false;">Self</a>
 			</span>
 		</div>
 		<create-saving-dialog :dialogs='dialogs'></create-saving-dialog>
